@@ -1,5 +1,7 @@
 package BSU.comp152;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -27,6 +29,9 @@ public class Main {
             System.out.println("Something went wrong getting data from the network");
             System.exit(-1);
         }
-        System.out.println(response);
+        var usefulData = response.body();
+        var dataParser = new Gson();
+        UniversityDataType[] uniList = dataParser.fromJson(usefulData,UniversityDataType[].class);
+        System.out.println(usefulData);
     }
 }
